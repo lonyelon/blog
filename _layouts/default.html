@@ -1,0 +1,41 @@
+<head>
+  <meta charset="UTF-8">
+  <title>Blog de Sergio</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    {% if page.language == "es" %} 
+      <h1>Blog de Sergio</h1>
+    {% elsif page.language == "en" %} 
+      <h1>Sergio's blog</h1>
+    {% endif %}
+    <nav>
+      <ul id="page-list">
+        {% if page.language == "es" %} 
+          <li><a href="/">Artículos</a></li>
+        {% elsif page.language == "en" %} 
+          <li><a href="/en">Articles</a></li>
+        {% endif %}
+        {% for p in site.pages %}
+          {% if p.title %} 
+            {% if p.language == page.language %} 
+              <li><a href="{{ p.url }}">{{ p.title }}</a></li>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </nav>
+  </header>
+  <main>
+    {{ content }}
+  </main>
+  <footer>
+    <a href="/feed.xml"><img src="/img/rss.svg" width="20em"></a>
+    <br>
+    Copyright 2023 Sergio Miguéns Iglesias
+  </footer>
+  {% if page.math == true %}
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  {% endif %}
+</body>
